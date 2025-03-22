@@ -1,6 +1,7 @@
 import StockList from "../components/StockList";
 import { useState } from "react";
 import "../css/Home.css";
+import { searchStocks } from "../services/api.ts";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -8,7 +9,7 @@ const Home = () => {
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    console.log("Searching for:", searchQuery);
+    searchStocks(searchQuery);
   };
 
   return (
