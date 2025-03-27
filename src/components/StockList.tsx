@@ -36,7 +36,7 @@ function StockList() {
       <div className="stock-list">
         {items.map((item, index) => (
           <div className="stock-list-item" key={index}>
-            <p>{item}</p>
+            <p className="stock-symbol">{item}</p>
             <div className="stock-price">
               {stockPrices[item] !== undefined
                 ? `$${stockPrices[item].toFixed(2)}`

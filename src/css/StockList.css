@@ -1,0 +1,32 @@
+.stock-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  gap: 10px; /* Adds spacing between elements */
+}
+
+.stock-symbol {
+  flex: 1; /* Pushes the price and button to the right */
+  font-weight: bold;
+}
+
+.stock-price {
+  flex: 0.5; /* Allows some space for the price */
+  text-align: center;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}

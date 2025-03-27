@@ -5,7 +5,7 @@ export const searchStocks = async (query: string) => {
     `${INVOKE_URL}/search?query=${encodeURIComponent(query)}`
   );
   const data = await response.json();
-  return data;
+  return data.result;
 };
 
 export const getStockInfo = async (query: string) => {
