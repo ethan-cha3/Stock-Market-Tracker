@@ -38,7 +38,7 @@ export const StockProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const removeStock = async (stock: string) => {
     try {
-      //await deleteStockAPI(username, stock);
+      await deleteStockAPI(username, stock);
       setStocks((prevStocks) => prevStocks.filter((s) => s !== stock));
     } catch (error) {
       console.error("Error deleting stock:", error);

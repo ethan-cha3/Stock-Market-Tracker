@@ -49,10 +49,25 @@ export const addStockAPI = async (username: string, query: string) => {
 };
 
 export const deleteStockAPI = async (username: string, query: string) => {
-  const response = await fetch(
-    `${INVOKE_URL}/deletestock?username=${encodeURIComponent(
-      username
-    )}&symbol=${encodeURIComponent(query)}`
-  );
-  await response.json();
+  const requestBody = {
+    username: username,
+    symbol: query,
+  };
+
+  const response = await fetch(`${INVOKE_URL}/deletestock`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error("Error deleting stock:", errorData);
+    throw new Error("Failed to delete stock");
+  }
+
+  const responseData = await response.json();
+  return responseData;
 };
