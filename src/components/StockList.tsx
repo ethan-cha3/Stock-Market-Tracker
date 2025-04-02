@@ -1,9 +1,28 @@
 import "../css/StockList.css";
 import { useEffect, useState } from "react";
-import { getStockInfo } from "../services/api.ts";
+import { getStockInfo, getStockList } from "../services/api.ts";
 
 function StockList() {
-  const items = ["MSFT", "AAPL", "VOO", "AMZN", "SCHD"];
+  // retrieve stock list from AWSDynamoDB
+  const username = "admin";
+  const [items, setItems] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchStockList = async () => {
+      let stockSymbols: string[] = [];
+      try {
+        const data = await getStockList(username);
+        stockSymbols = data;
+      } catch (error) {
+        console.error(`Error fetching stock list from server:`, error);
+        setItems([]);
+      }
+      setItems(stockSymbols);
+    };
+
+    fetchStockList();
+  }, []);
+
+  // retrieve stock prices for each stock in the list from Finnhub
   const [stockPrices, setStockPrices] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
@@ -24,7 +43,7 @@ function StockList() {
     };
 
     fetchStockPrices();
-  }, []);
+  }, [items]);
 
   function onDeleteClick() {
     console.log("DELETE!");

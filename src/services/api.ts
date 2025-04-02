@@ -9,11 +9,25 @@ export const searchStocks = async (query: string) => {
 };
 
 export const getStockInfo = async (query: string) => {
-  console.log(query);
   const response = await fetch(
     `${INVOKE_URL}/get?symbol=${encodeURIComponent(query)}`
   );
   const data = await response.json();
-  console.log(data.dumps);
   return data;
 };
+
+export const getStockList = async (query: string) => {
+  const response = await fetch(
+    `${INVOKE_URL}/getstocklist?username=${encodeURIComponent(query)}`
+  );
+  const data = await response.json();
+  return data;
+};
+
+// export const addStock = async () => {
+//   const response = await fetch(
+//     `${INVOKE_URL}/`
+//   );
+//   const data = await response.json();
+//   return data;
+// };
