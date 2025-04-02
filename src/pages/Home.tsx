@@ -12,7 +12,6 @@ const Home = () => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
     setSearchResult(await searchStocks(searchQuery));
-    console.log(searchResult);
   };
 
   return (

@@ -24,10 +24,35 @@ export const getStockList = async (query: string) => {
   return data;
 };
 
-// export const addStock = async () => {
-//   const response = await fetch(
-//     `${INVOKE_URL}/`
-//   );
-//   const data = await response.json();
-//   return data;
-// };
+export const addStockAPI = async (username: string, query: string) => {
+  const requestBody = {
+    username: username,
+    symbol: query,
+  };
+
+  const response = await fetch(`${INVOKE_URL}/addstock`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error("Error adding stock:", errorData);
+    throw new Error("Failed to add stock");
+  }
+
+  const responseData = await response.json();
+  return responseData;
+};
+
+export const deleteStockAPI = async (username: string, query: string) => {
+  const response = await fetch(
+    `${INVOKE_URL}/deletestock?username=${encodeURIComponent(
+      username
+    )}&symbol=${encodeURIComponent(query)}`
+  );
+  await response.json();
+};

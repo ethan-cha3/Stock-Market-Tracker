@@ -1,4 +1,5 @@
 import "../css/SearchList.css";
+import { useStock } from "../contexts/StockContext";
 
 interface SearchItem {
   description: string;
@@ -11,11 +12,12 @@ interface Props {
   items: SearchItem[];
 }
 
-function onAddClick() {
-  console.log("ADD!");
-}
-
 const SearchList = ({ items }: Props) => {
+  const { addStock } = useStock();
+  function onAddClick(stock: string) {
+    addStock(stock);
+  }
+
   return (
     <div className="search-list">
       {items.length === 0 ? (
@@ -28,7 +30,10 @@ const SearchList = ({ items }: Props) => {
                 <b>{item.displaySymbol}</b>
                 <small>{item.description}</small>
               </div>
-              <button className="add-btn" onClick={onAddClick}>
+              <button
+                className="add-btn"
+                onClick={() => onAddClick(item.displaySymbol)}
+              >
                 +
               </button>
             </div>
