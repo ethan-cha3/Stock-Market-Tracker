@@ -65,7 +65,7 @@
   font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
-  justify-self: end; /* Keeps the button at the far right */
+  justify-self: end;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,7 +76,6 @@
   color: rgb(255, 255, 255);
 }
 
-/* Adjust individual column styles */
 .deep-stock-price-pos,
 .deep-stock-price-neg,
 .deep-stock-price-neutral {

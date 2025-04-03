@@ -50,7 +50,7 @@ const CompanyProfile = () => {
           industry: data.finnhubIndustry,
           ipo: data.ipo,
           logo: data.logo,
-          marketcap: data.marketCapitilization,
+          marketcap: data.marketCapitalization,
           name: data.name,
           phone: data.phone,
           shareoutstanding: data.shareOutstanding,
@@ -130,7 +130,7 @@ const CompanyProfile = () => {
               <td>
                 <strong>Market Cap:</strong>
               </td>
-              <td>{companyInfo[symbol].marketcap}</td>
+              <td>{companyInfo[symbol].marketcap.toLocaleString()}</td>
             </tr>
             <tr>
               <td>

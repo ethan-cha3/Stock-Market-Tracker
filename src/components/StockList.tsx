@@ -30,10 +30,7 @@ function StockList() {
           return (
             <div className="stock-list-item" key={index}>
               <div>
-                <Link
-                  to={`/companyprofile/${item}`}
-                  className="deep-stock-symbol"
-                >
+                <Link to={`/companyprofile/${item}`} className="stock-symbol">
                   {item}
                 </Link>
               </div>
