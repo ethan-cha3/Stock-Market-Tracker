@@ -1,40 +1,8 @@
 import "../css/StockList.css";
-import { useEffect, useState } from "react";
-import { getStockInfo } from "../services/api.ts";
 import { useStock } from "../contexts/StockContext";
 
 function StockList() {
-  // retrieve stock list from AWSDynamoDB
-  const { stocks, removeStock } = useStock();
-  // retrieve stock prices for each stock in the list from Finnhub
-  const [stockPrices, setStockPrices] = useState<{
-    [key: string]: { currentPrice: number; priceChange: number };
-  }>({});
-
-  useEffect(() => {
-    const fetchStockPrices = async () => {
-      const prices: {
-        [key: string]: { currentPrice: number; priceChange: number };
-      } = {};
-
-      for (const symbol of stocks) {
-        try {
-          const data = await getStockInfo(symbol);
-          prices[symbol] = {
-            currentPrice: data.c,
-            priceChange: data.d,
-          };
-        } catch (error) {
-          console.error(`Error fetching stock info for ${symbol}:`, error);
-          prices[symbol] = { currentPrice: -1, priceChange: 0 };
-        }
-      }
-
-      setStockPrices(prices);
-    };
-
-    fetchStockPrices();
-  }, [stocks]);
+  const { stocks, stockPrices, removeStock } = useStock();
 
   function onDeleteClick(stock: string) {
     removeStock(stock);

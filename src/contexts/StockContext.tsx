@@ -1,13 +1,20 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { getStockList, addStockAPI, deleteStockAPI } from "../services/api.ts";
+import {
+  getStockList,
+  addStockAPI,
+  deleteStockAPI,
+  getStockInfo,
+} from "../services/api.ts";
 
 const username = "admin";
 
 interface StockContextType {
   stocks: string[];
+  stockPrices: { [key: string]: { currentPrice: number; priceChange: number } };
   addStock: (stock: string) => void;
   removeStock: (stock: string) => void;
   fetchStocksFromAPI: () => void;
+  fetchStockPrices: () => void;
 }
 
 const StockContext = createContext<StockContextType | undefined>(undefined);
@@ -24,6 +31,31 @@ export const StockProvider: React.FC<{ children: React.ReactNode }> = ({
     } catch (error) {
       console.error("Error fetching stocks:", error);
     }
+  };
+
+  const [stockPrices, setStockPrices] = useState<{
+    [key: string]: { currentPrice: number; priceChange: number };
+  }>({});
+
+  const fetchStockPrices = async () => {
+    const prices: {
+      [key: string]: { currentPrice: number; priceChange: number };
+    } = {};
+
+    for (const symbol of stocks) {
+      try {
+        const data = await getStockInfo(symbol);
+        prices[symbol] = {
+          currentPrice: data.c,
+          priceChange: data.d,
+        };
+      } catch (error) {
+        console.error(`Error fetching stock info for ${symbol}:`, error);
+        prices[symbol] = { currentPrice: -1, priceChange: 0 };
+      }
+    }
+
+    setStockPrices(prices);
   };
 
   const addStock = async (stock: string) => {
@@ -48,9 +80,22 @@ export const StockProvider: React.FC<{ children: React.ReactNode }> = ({
     fetchStocksFromAPI();
   }, []);
 
+  useEffect(() => {
+    if (stocks.length > 0) {
+      fetchStockPrices();
+    }
+  }, [stocks]);
+
   return (
     <StockContext.Provider
-      value={{ stocks, addStock, removeStock, fetchStocksFromAPI }}
+      value={{
+        stocks,
+        stockPrices,
+        addStock,
+        removeStock,
+        fetchStocksFromAPI,
+        fetchStockPrices,
+      }}
     >
       {children}
     </StockContext.Provider>
