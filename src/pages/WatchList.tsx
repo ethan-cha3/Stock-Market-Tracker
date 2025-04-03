@@ -1,5 +1,8 @@
+import "../css/DeepStockList.css";
+import DeepStockList from "../components/StockList.tsx";
+
 const WatchList = () => {
-  return <div>WatchList</div>;
+  return <DeepStockList />;
 };
 
 export default WatchList;

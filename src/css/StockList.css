@@ -1,32 +1,59 @@
 .stock-list-item {
   display: flex;
-  align-items: center;
+  align-items: center; /* Ensures vertical alignment */
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  gap: 10px; /* Adds spacing between elements */
+  gap: 10px;
 }
 
 .stock-symbol {
-  flex: 1; /* Pushes the price and button to the right */
+  flex: 1;
   font-weight: bold;
+  display: flex;
+  align-items: center; /* Aligns text vertically */
+  height: 40px; /* Match other elements */
 }
 
-.stock-price {
-  flex: 0.5; /* Allows some space for the price */
+.stock-price-neutral,
+.stock-price-neg,
+.stock-price-pos {
+  width: 80px; /* Fixed width */
+  height: 40px; /* Ensures same height */
   text-align: center;
+  line-height: 40px; /* Centers text vertically */
+  border-radius: 10px; /* Rounded edges */
+  flex: 0 0 auto; /* Prevents flex from resizing */
+  color: white;
+}
+
+.stock-price-neutral {
+  background-color: rgb(146, 146, 146);
+}
+
+.stock-price-neg {
+  background-color: red;
+}
+
+.stock-price-pos {
+  background-color: green;
 }
 
 .delete-btn {
-  background-color: red;
-  color: white;
-  border: none;
+  background-color: rgba(255, 0, 0, 0);
+  color: rgb(0, 0, 0);
+  border: 2px solid #e8e8e8;
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
+  height: 40px; /* Matches other elements */
+  display: flex;
+  align-items: center; /* Centers text/icon */
+  justify-content: center;
 }
 
 .delete-btn:hover {
-  background-color: darkred;
+  background-color: red;
+  color: rgb(255, 255, 255);
 }

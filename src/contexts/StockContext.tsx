@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { getStockList, addStockAPI, deleteStockAPI } from "../services/api.ts";
 
-// Define the API Gateway URL (replace with your actual URL)
 const username = "admin";
 
 interface StockContextType {
