@@ -1,6 +1,6 @@
 .stock-list-item {
   display: flex;
-  align-items: center; /* Ensures vertical alignment */
+  align-items: center;
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #ddd;
@@ -11,19 +11,19 @@
   flex: 1;
   font-weight: bold;
   display: flex;
-  align-items: center; /* Aligns text vertically */
-  height: 40px; /* Match other elements */
+  align-items: center;
+  height: 40px;
 }
 
 .stock-price-neutral,
 .stock-price-neg,
 .stock-price-pos {
-  width: 80px; /* Fixed width */
-  height: 40px; /* Ensures same height */
+  width: 80px;
+  height: 40px;
   text-align: center;
-  line-height: 40px; /* Centers text vertically */
-  border-radius: 10px; /* Rounded edges */
-  flex: 0 0 auto; /* Prevents flex from resizing */
+  line-height: 40px;
+  border-radius: 10px;
+  flex: 0 0 auto;
   color: white;
 }
 
@@ -47,9 +47,9 @@
   font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
-  height: 40px; /* Matches other elements */
+  height: 40px;
   display: flex;
-  align-items: center; /* Centers text/icon */
+  align-items: center;
   justify-content: center;
 }
 

@@ -1,40 +1,8 @@
 import "../css/DeepStockList.css";
-import { useEffect, useState } from "react";
-import { getStockInfo } from "../services/api.ts";
 import { useStock } from "../contexts/StockContext";
 
-function StockList() {
-  // retrieve stock list from AWSDynamoDB
-  const { stocks, removeStock } = useStock();
-  // retrieve stock prices for each stock in the list from Finnhub
-  const [stockPrices, setStockPrices] = useState<{
-    [key: string]: { currentPrice: number; priceChange: number };
-  }>({});
-
-  useEffect(() => {
-    const fetchStockPrices = async () => {
-      const prices: {
-        [key: string]: { currentPrice: number; priceChange: number };
-      } = {};
-
-      for (const symbol of stocks) {
-        try {
-          const data = await getStockInfo(symbol);
-          prices[symbol] = {
-            currentPrice: data.c,
-            priceChange: data.d,
-          };
-        } catch (error) {
-          console.error(`Error fetching stock info for ${symbol}:`, error);
-          prices[symbol] = { currentPrice: -1, priceChange: 0 };
-        }
-      }
-
-      setStockPrices(prices);
-    };
-
-    fetchStockPrices();
-  }, [stocks]);
+function DeepStockList() {
+  const { stocks, stockPrices, removeStock } = useStock();
 
   function onDeleteClick(stock: string) {
     removeStock(stock);
@@ -43,27 +11,41 @@ function StockList() {
   return (
     <>
       <h1>Watch List</h1>
-      <div className="stock-list">
+      <div className="deep-stock-list">
+        <div className="deep-stock-list-item header-row">
+          <p className="deep-stock-symbol">Symbol</p>
+          <p className="deep-stock-price">Current Price</p>
+          <p className="deep-change">Price Change</p>
+          <p className="deep-percent-change">Percent Change</p>
+          <p className="deep-high-price">High Price</p>
+          <p className="deep-low-price">Low Price</p>
+          <p className="deep-open-price">Open Price</p>
+          <p className="deep-previous-close-price">Previous Close</p>
+        </div>
         {stocks.map((item, index) => {
           const stockData = stockPrices[item];
-          const currentPrice =
-            stockData?.currentPrice !== undefined
-              ? `$${stockData.currentPrice.toFixed(2)}`
-              : "--";
+          const currentPrice = stockData?.currentPrice ?? 0;
           const priceChange = stockData?.priceChange ?? 0;
-          const priceClass =
-            priceChange > 0
-              ? "stock-price-pos"
-              : priceChange < 0
-              ? "stock-price-neg"
-              : "stock-price-neutral";
+          const percentChange = stockData?.percentChange ?? 0;
+          const highPrice = stockData?.highPrice ?? 0;
+          const lowPrice = stockData?.lowPrice ?? 0;
+          const openPrice = stockData?.openPrice ?? 0;
+          const previousClosePrice = stockData?.previousClosePrice ?? 0;
 
           return (
-            <div className="stock-list-item" key={index}>
-              <p className="stock-symbol">{item}</p>
-              <div className={priceClass}>{currentPrice}</div>
+            <div className="deep-stock-list-item" key={index}>
+              <p className="deep-stock-symbol">{item}</p>
+              <div className="deep-stock-price">${currentPrice}</div>
+              <div className="deep-change">${priceChange}</div>
+              <div className="deep-percent-change">{percentChange}%</div>
+              <div className="deep-high-price">${highPrice}</div>
+              <div className="deep-low-price">${lowPrice}</div>
+              <div className="deep-open-price">${openPrice}</div>
+              <div className="deep-previous-close-price">
+                ${previousClosePrice}
+              </div>
               <button
-                className="delete-btn"
+                className="deep-delete-btn"
                 onClick={() => onDeleteClick(item)}
               >
                 X
@@ -76,4 +58,4 @@ function StockList() {
   );
 }
 
-export default StockList;
+export default DeepStockList;

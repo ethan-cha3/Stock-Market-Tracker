@@ -1,1 +1,98 @@
-@import url("StockList.css");
+.deep-stock-list {
+  margin: 20px;
+}
+
+.deep-stock-list-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.2fr; /* Adjusted column layout */
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.header-row {
+  background-color: #f0f0f0; /* Light background for the header */
+  font-weight: bold;
+  color: #333;
+}
+
+.deep-stock-symbol {
+  text-align: left; /* Left-align the stock symbol */
+  font-weight: bold;
+}
+
+.deep-stock-price,
+.deep-change,
+.deep-percent-change,
+.deep-high-price,
+.deep-low-price,
+.deep-open-price,
+.deep-previous-close-price {
+  text-align: center;
+}
+
+.deep-stock-symbol,
+.deep-stock-price,
+.deep-change,
+.deep-percent-change,
+.deep-high-price,
+.deep-low-price,
+.deep-open-price,
+.deep-previous-close-price {
+  padding: 5px;
+}
+
+.deep-delete-btn {
+  background-color: rgba(255, 0, 0, 0);
+  color: rgb(0, 0, 0);
+  border: 2px solid #e8e8e8;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  justify-self: end; /* Keeps the button at the far right */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deep-delete-btn:hover {
+  background-color: red;
+  color: rgb(255, 255, 255);
+}
+
+/* Adjust individual column styles */
+.deep-stock-price-pos,
+.deep-stock-price-neg,
+.deep-stock-price-neutral {
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 10px;
+  color: white;
+}
+
+.deep-stock-price-pos {
+  background-color: green;
+}
+
+.deep-stock-price-neg {
+  background-color: red;
+}
+
+.deep-stock-price-neutral {
+  background-color: rgb(146, 146, 146);
+}
+
+.deep-change,
+.deep-percent-change,
+.deep-high-price,
+.deep-low-price,
+.deep-open-price,
+.deep-previous-close-price {
+  font-size: 14px;
+  color: #555;
+}

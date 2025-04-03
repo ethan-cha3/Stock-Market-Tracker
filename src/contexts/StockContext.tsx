@@ -10,7 +10,17 @@ const username = "admin";
 
 interface StockContextType {
   stocks: string[];
-  stockPrices: { [key: string]: { currentPrice: number; priceChange: number } };
+  stockPrices: {
+    [key: string]: {
+      currentPrice: number;
+      priceChange: number;
+      percentChange: number;
+      highPrice: number;
+      lowPrice: number;
+      openPrice: number;
+      previousClosePrice: number;
+    };
+  };
   addStock: (stock: string) => void;
   removeStock: (stock: string) => void;
   fetchStocksFromAPI: () => void;
@@ -34,12 +44,28 @@ export const StockProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const [stockPrices, setStockPrices] = useState<{
-    [key: string]: { currentPrice: number; priceChange: number };
+    [key: string]: {
+      currentPrice: number;
+      priceChange: number;
+      percentChange: number;
+      highPrice: number;
+      lowPrice: number;
+      openPrice: number;
+      previousClosePrice: number;
+    };
   }>({});
 
   const fetchStockPrices = async () => {
     const prices: {
-      [key: string]: { currentPrice: number; priceChange: number };
+      [key: string]: {
+        currentPrice: number;
+        priceChange: number;
+        percentChange: number;
+        highPrice: number;
+        lowPrice: number;
+        openPrice: number;
+        previousClosePrice: number;
+      };
     } = {};
 
     for (const symbol of stocks) {
@@ -48,10 +74,23 @@ export const StockProvider: React.FC<{ children: React.ReactNode }> = ({
         prices[symbol] = {
           currentPrice: data.c,
           priceChange: data.d,
+          percentChange: data.dp,
+          highPrice: data.h,
+          lowPrice: data.l,
+          openPrice: data.o,
+          previousClosePrice: data.pc,
         };
       } catch (error) {
         console.error(`Error fetching stock info for ${symbol}:`, error);
-        prices[symbol] = { currentPrice: -1, priceChange: 0 };
+        prices[symbol] = {
+          currentPrice: -1,
+          priceChange: 0,
+          percentChange: 0,
+          highPrice: 0,
+          lowPrice: 0,
+          openPrice: 0,
+          previousClosePrice: 0,
+        };
       }
     }
 
