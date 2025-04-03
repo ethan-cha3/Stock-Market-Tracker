@@ -13,14 +13,27 @@
 }
 
 .header-row {
-  background-color: #f0f0f0; /* Light background for the header */
+  background-color: #f0f0f0;
   font-weight: bold;
   color: #333;
 }
 
-.deep-stock-symbol {
-  text-align: left; /* Left-align the stock symbol */
+.deep-stock-symbol-header {
   font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+.deep-stock-symbol {
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.deep-stock-symbol:hover {
+  text-decoration: underline;
+  color: #000000;
 }
 
 .deep-stock-price,

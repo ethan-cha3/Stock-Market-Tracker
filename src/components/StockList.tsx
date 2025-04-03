@@ -1,5 +1,6 @@
 import "../css/StockList.css";
 import { useStock } from "../contexts/StockContext";
+import { Link } from "react-router-dom";
 
 function StockList() {
   const { stocks, stockPrices, removeStock } = useStock();
@@ -28,7 +29,14 @@ function StockList() {
 
           return (
             <div className="stock-list-item" key={index}>
-              <p className="stock-symbol">{item}</p>
+              <div>
+                <Link
+                  to={`/companyprofile/${item}`}
+                  className="deep-stock-symbol"
+                >
+                  {item}
+                </Link>
+              </div>
               <div className={priceClass}>{currentPrice}</div>
               <button
                 className="delete-btn"

@@ -71,3 +71,11 @@ export const deleteStockAPI = async (username: string, query: string) => {
   const responseData = await response.json();
   return responseData;
 };
+
+export const getCompanyProfile = async (symbol: string) => {
+  const response = await fetch(
+    `${INVOKE_URL}/getcompanyprofile?symbol=${encodeURIComponent(symbol)}`
+  );
+  const data = await response.json();
+  return data;
+};

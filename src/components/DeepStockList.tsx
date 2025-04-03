@@ -1,5 +1,6 @@
 import "../css/DeepStockList.css";
 import { useStock } from "../contexts/StockContext";
+import { Link } from "react-router-dom";
 
 function DeepStockList() {
   const { stocks, stockPrices, removeStock } = useStock();
@@ -13,7 +14,7 @@ function DeepStockList() {
       <h1>Watch List</h1>
       <div className="deep-stock-list">
         <div className="deep-stock-list-item header-row">
-          <p className="deep-stock-symbol">Symbol</p>
+          <p className="deep-stock-symbol-header">Symbol</p>
           <p className="deep-stock-price">Current Price</p>
           <p className="deep-change">Price Change</p>
           <p className="deep-percent-change">Percent Change</p>
@@ -34,7 +35,14 @@ function DeepStockList() {
 
           return (
             <div className="deep-stock-list-item" key={index}>
-              <p className="deep-stock-symbol">{item}</p>
+              <div>
+                <Link
+                  to={`/companyprofile/${item}`}
+                  className="deep-stock-symbol"
+                >
+                  {item}
+                </Link>
+              </div>
               <div className="deep-stock-price">${currentPrice}</div>
               <div className="deep-change">${priceChange}</div>
               <div className="deep-percent-change">{percentChange}%</div>

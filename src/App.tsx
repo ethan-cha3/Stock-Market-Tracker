@@ -4,6 +4,7 @@ import WatchList from "./pages/WatchList";
 import NavBar from "./components/NavBar";
 import { Routes, Route } from "react-router-dom";
 import { StockProvider } from "./contexts/StockContext";
+import CompanyProfile from "./pages/CompanyProfile";
 
 const App = () => {
   return (
@@ -14,6 +15,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/watchlist" element={<WatchList />} />
+            <Route
+              path="/companyprofile/:stockSymbol"
+              element={<CompanyProfile />}
+            />
           </Routes>
         </main>
       </StockProvider>

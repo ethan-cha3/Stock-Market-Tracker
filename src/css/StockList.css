@@ -8,11 +8,16 @@
 }
 
 .stock-symbol {
-  flex: 1;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  height: 40px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  align-items: right;
+}
+
+.stock-symbol:hover {
+  text-decoration: underline;
+  color: #000000;
 }
 
 .stock-price-neutral,
