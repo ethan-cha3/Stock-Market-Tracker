@@ -1,4 +1,4 @@
-const INVOKE_URL = "https://0c9frui112.execute-api.us-east-1.amazonaws.com/dev";
+const INVOKE_URL = process.env.API_INVOKE_URL;;
 
 export const searchStocks = async (query: string) => {
   const response = await fetch(
